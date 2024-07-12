@@ -65,7 +65,7 @@ public class GenerateAst{
         writer.println("  interface Visitor<R> {");
         for (String type : types){
             String typename = type.split(":")[0].trim();
-            writer.println("    R visit" + typeName + baseName + "(" + typeName + " " + baseName.toLowerCase() + ");");
+            writer.println("    R visit" + typename + baseName + "(" + typename + " " + baseName.toLowerCase() + ");");
         }
         writer.println("  }");
     }
