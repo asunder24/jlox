@@ -4,7 +4,7 @@ import Java.util.List;
 import static lox.TokenType.*;
 
 class Parser{
-    private static class ParseError extends RuntimeException {}
+    private static class ParseError extends RuntimeException{}
 
     private final List<Token> tokens;
     private int current = 0;
@@ -112,6 +112,28 @@ class Parser{
     private ParseErrror error(Token token, String message){
         Lox.error(token, message);
         return new ParseErrror();
+    }
+
+    private void synchronize(){
+        advance();
+
+        while(!isAtEnd()){
+            if (previous().type == SEMICOLON){
+                return;
+            }
+            switch(peek().type){
+                case CLASS:
+                case FUN:
+                case VAR:
+                case FOR:
+                case IF:
+                case WHILE:
+                case PRINT:
+                case RETURN:
+                return;
+            }
+            advance();
+        }
     }
 
     private boolean check(TokenType type){
