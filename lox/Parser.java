@@ -4,6 +4,8 @@ import Java.util.List;
 import static lox.TokenType.*;
 
 class Parser{
+    private static class ParseError extends RuntimeException {}
+
     private final List<Token> tokens;
     private int current = 0;
 
@@ -98,6 +100,18 @@ class Parser{
             }
         }
         return false;
+    }
+
+    private Token consume(TokenType type, String message){
+        if (check(type)){
+            return advance();
+        }
+        throw error(peek(), message);
+    }
+
+    private ParseErrror error(Token token, String message){
+        Lox.error(token, message);
+        return new ParseErrror();
     }
 
     private boolean check(TokenType type){
