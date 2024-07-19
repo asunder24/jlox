@@ -37,7 +37,30 @@ class Parser{
         return false;
     }
 
-    
+    private boolean check(TokenType type){
+        if (isAtEnd()){
+            return false;
+        }
+        return peek.type() == type;
+    }
 
+    private Token advance(){
+        if (!isAtEnd()){
+            curent++;
+        }
+        return previous();
+    }
+
+    private boolean isAtEnd() {
+        return peek().type == EOF;
+    }
+
+    private Token peek() {
+        return tokens.get(current);
+    }
+
+    private Token previous() {
+        return tokens.get(current - 1);
+    }
 
 }
