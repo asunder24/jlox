@@ -1,6 +1,6 @@
 package lox;
 
-import Java.util.List;
+import java.util.List;
 import static lox.TokenType.*;
 
 class Parser{
@@ -74,7 +74,7 @@ class Parser{
         if(match(BANG, MINUS)){
             Token operator = previous();
             Expr right = unary();
-            return new Expr.Binary(operator, right);
+            return new Expr.Unary(operator, right);
         }
         return primary();
     }
@@ -151,12 +151,12 @@ class Parser{
         if (isAtEnd()){
             return false;
         }
-        return peek.type() == type;
+        return peek().type == type;
     }
 
     private Token advance(){
         if (!isAtEnd()){
-            curent++;
+            current++;
         }
         return previous();
     }
