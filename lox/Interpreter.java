@@ -125,7 +125,7 @@ class Interpreter implements Expr.Visitor<Object>{
         if (object == null){
             return false;
         }
-        if (object instanceof boolean){
+        if (object instanceof Boolean){
             return (boolean)object;
         }
         return true;
