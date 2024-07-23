@@ -22,6 +22,25 @@ class Parser{
         return statements; 
     }
 
+    private Stmt statement(){
+        if (match(PRINT)){
+            return printStatement();
+        }
+        return expressionStatement();
+    }
+    
+    private Stmt printStatement(){
+        Expr value = expression();
+        consume(SEMICOLON, "Expect ';' after value.");
+        return new Stmt.Print(value);
+    }
+
+    private Stmt expressionStatement(){
+        Expr expr = expression();
+        consume(SEMICOLON, "Expect ';' after expression.");
+        return new Stmt.Expression(expr);
+    }
+
     private Expr expression(){
         return equality();
     }
