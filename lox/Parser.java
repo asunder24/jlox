@@ -50,12 +50,12 @@ class Parser{
             if (match(VAR)){
                 return varDeclaration();
             }
+            return statement();
         }
         catch (ParseError error){
             synchronize();
             return null;
         }
-        return null;
     }
 
     private Stmt varDeclaration(){
