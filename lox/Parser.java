@@ -55,6 +55,7 @@ class Parser{
             synchronize();
             return null;
         }
+        return null;
     }
 
     private Stmt varDeclaration(){
