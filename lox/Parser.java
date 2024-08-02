@@ -188,7 +188,7 @@ class Parser{
                 }
                 parameters.add(consume(IDENTIFIER, "Expect parameter name."));
             }
-            while(match(COMMA))
+            while(match(COMMA));
         }
         consume(RIGHT_PAREN, "Expect ')' after parameters.");
         consume(LEFT_BRACE, "Expect '{' before " + kind + " body.");
