@@ -21,6 +21,31 @@ class Resolver implements Expr.Visitor<Void>, Stmt.Visitor<Void>{
         return null;
     }
 
+    @Override
+    public Void visitVarStmt(Stmt.Var stmt){
+        declare(stmt.name);
+        if (stmt.initializer != null){
+            resolve(stmt.initializer);
+        }
+        define(stmt.name);
+        return null;
+    }
+
+    private void declare(Token name){
+        if (scopes.isEmpty()){
+            return;
+        }
+        Map<String, Boolean> scope = scopes.peek();
+        scope.put(name.lexeme, false);
+    }
+
+    private void define(Token name){
+        if (scopes.isEmpty()){
+            return;
+        }
+        scopes.peek().put(name.lexeme, true);
+    }
+
     void resolve(List<Stmt> statements){
         for (Stmt statement : statements){
             resolve(statement);
