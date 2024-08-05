@@ -40,11 +40,18 @@ class Resolver implements Expr.Visitor<Void>, Stmt.Visitor<Void>{
     return null;
     }
 
+    @Override
+    public Void visitAssignExpr(Expr.Assign expr) {
+        resolve(expr.value);
+        resolveLocal(expr, expr.name);
+        return null;
+    }
+
     private void resolveLocal(Expr expr, Token name){
         for (int i = scopes.size() - 1; i >= 0; i--){
-        if (scopes.get(i).containsKey(name.lexeme)){
-            interpreter.resolve(expr, scopes.size() - 1 - i);
-            return;
+            if (scopes.get(i).containsKey(name.lexeme)){
+                interpreter.resolve(expr, scopes.size() - 1 - i);
+                return;
             }
         }
     }
