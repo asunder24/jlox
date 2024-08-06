@@ -60,7 +60,8 @@ public class Lox {
         if (hadError){
             return;
         }
-
+        Resolver resolver = new Resolver(interpreter);
+        resolver.resolve(statements);
         interpreter.interpret(statements);
     }
     
