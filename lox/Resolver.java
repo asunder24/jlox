@@ -172,7 +172,7 @@ class Resolver implements Expr.Visitor<Void>, Stmt.Visitor<Void>{
         }
     }
 
-    void resolve(Stmt statement){
+    void resolve(Stmt stmt){
         stmt.accept(this);
     }
 
