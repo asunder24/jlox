@@ -12,6 +12,6 @@ class LoxInstance{
 
     @Override
     public String toString(){
-        return klass.name + " instanceeee";
+        return klass.name + " instance";
     }
 }
